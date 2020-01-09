@@ -15,6 +15,7 @@ class HomeController implements IControllerBase {
 
   public initRoutes() {
     this.router.get('/', sessionTrueMiddleware, this.index)
+    this.router.get('/demo', sessionTrueMiddleware, this.demo)
   }
 
   index = (req: Request, res: Response) => {
@@ -23,6 +24,7 @@ class HomeController implements IControllerBase {
       constants: constants,
       csss: loadCss([
         'assets/css/styles',
+ 
       ]), 
       jss: loadJs([
         'assets/js/app',
@@ -30,6 +32,22 @@ class HomeController implements IControllerBase {
     }
     res.status(200).render('home/index', locals)
   }
+
+  demo = (req: Request, res: Response) => {
+    let locals = {
+      title: 'Estamos en demo',
+      constants: constants,
+      csss: loadCss([
+        'assets/css/styles',   
+        'assets/css/demo',  
+       ]), 
+      jss: loadJs([
+        'assets/js/app',
+      ]), 
+    }
+    res.status(200).render('home/demo', locals)
+  }
+
 }
 
 export default HomeController
